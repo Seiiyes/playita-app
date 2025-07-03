@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es"
+      th:replace="~{layout :: layout('Reportes de Ventas', ~{::section}, ~{::#extraHead}, ~{::#extraScripts}, ~{::#jsonData})}"
+
+<th:block id="extraHead" th:fragment="extraHead">
+    <link rel="stylesheet" th:href="@{/css/pages/reabastecimiento.css}">
+</th:block>
+
+<section class="container" th:fragment="section" id="section">
+  <h2 class="titulo-modulo">🔄 Reabastecimientos</h2>
+
+  <div class="acciones-top">
+    <button id="btnNuevoReab" class="btn primary">➕ Nuevo Reabastecimiento</button>
+  </div>
+
+  <div class="tabla-contenedor glass">
+    <table class="tabla-reab">
+      <thead>
+        <tr>
+          <th>Fecha</th><th>Hora</th><th>Proveedor</th><th>Costo</th><th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="r : ${reabastecimientos}">
+          
+          <td th:text="${r.fecha}">2025-07-02</td>
+          <td th:text="${r.hora}">10:30</td>
+          <td th:text="${r.proveedor.pNombre}">Proveedor X</td>
+          <td th:text="${r.costo}">$100.00</td>
+          <td class="acciones-usuario">
+            <button class="btn small secondary btnVerDetalle" th:attr="data-id=${r.id}">🔍 Ver</button>
+            <button class="btn small danger formEliminarReab" th:data-id="${r.id}">🗑️ Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal Nuevo -->
+  <div id="modalNuevoReab" class="modal">
+    <div class="modal-content">
+      <span class="cerrar" id="cerrarNuevo">&times;</span>
+      <form id="formNuevoReab" th:action="@{/reabastecimientos/guardar}" method="post">
+        <h2>➕ Nuevo Reabastecimiento</h2>
+        <label>Proveedor</label>
+        <select name="proveedor.id" required>
+          <option value="" disabled selected>Selecciona proveedor</option>
+          <option th:each="p : ${proveedores}" th:value="${p.id}" th:text="${p.pNombre + ' ' + p.pApellido}"></option>
+        </select>
+        <label>Producto & Cantidad</label>
+        <div id="lineas"></div>
+        <button type="button" class="btn secondary" id="agregarLinea">➕ Agregar línea</button>
+        <label>Total Costo</label>
+        <input type="number" name="costo" step="0.01" required>
+        <div class="modal-actions">
+          <button type="submit" class="btn primary">Guardar</button>
+          <button type="button" id="cancelarNuevo" class="btn secondary">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Detalle -->
+  <div id="modalDetalleReab" class="modal">
+    <div class="modal-content">
+      <span class="cerrar" id="cerrarDetalle">&times;</span>
+      <h2>Detalles del Reabastecimiento</h2>
+      <table class="tabla-detalle">
+        <thead><tr><th>Producto</th><th>Cantidad</th></tr></thead>
+        <tbody id="detalleBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<th:block id="extraScripts" th:fragment="extraScripts">
+  <script th:src="@{/js/reabastecimiento.js}" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</th:block>
+</html>

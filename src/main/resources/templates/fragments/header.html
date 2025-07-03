@@ -1,0 +1,39 @@
+<!-- fragments/header.html -->
+<div th:fragment="header">
+    <header class="site-header glass">
+        <!-- Logo y nombre de la marca -->
+        <div class="logo-container">
+            <a th:href="@{/}" class="logo-link" aria-label="Ir al inicio">
+                <img th:src="@{/images/la-playita-logo.png}" alt="Logo de La Playita" class="logo">
+                <span class="brand">La Playita</span>
+            </a>
+        </div>
+
+        <!-- Área del usuario / login -->
+        <nav class="main-nav" role="navigation" aria-label="Navegación principal">
+            <th:block sec:authorize="isAuthenticated()">
+                <div class="user-info">
+                    <span class="nav-usuario">
+                        Hola, <strong th:text="${nombreCompleto}">Usuario</strong>
+                    </span>
+                    <form th:action="@{/logout}" method="post" class="logout-form">
+                        <button type="submit" class="nav-button secondary" aria-label="Cerrar sesión">
+                            Cerrar sesión
+                        </button>
+                    </form>
+                </div>
+            </th:block>
+
+            <th:block sec:authorize="!isAuthenticated()">
+                <div class="auth-links">
+                    <a th:href="@{/auth/login}" class="nav-button primary" aria-label="Iniciar sesión">
+                        Iniciar sesión
+                    </a>
+                    <a th:href="@{/auth/registro}" class="nav-button secondary" aria-label="Registrarse">
+                        Registrarse
+                    </a>
+                </div>
+            </th:block>
+        </nav>
+    </header>
+</div>

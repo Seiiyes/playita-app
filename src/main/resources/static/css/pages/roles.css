@@ -1,0 +1,196 @@
+/* ====== FONDO GENERAL ====== */
+body {
+  background: url('/images/fondo.jpeg') no-repeat center center fixed;
+  background-size: cover;
+  font-family: 'Segoe UI', sans-serif;
+  color: #fff;
+  margin: 0;
+}
+
+/* ====== TÍTULO DEL MÓDULO ====== */
+.titulo-modulo {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 1.5rem 0;
+  color: #ffd700;
+  text-align: center;
+}
+
+/* ====== BOTONES ====== */
+.btn {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn.primary {
+  background-color: #00ffa2;
+  color: #000;
+  box-shadow: 0 0 10px #00ffa2;
+}
+
+.btn.primary:hover {
+  background-color: #00cc85;
+}
+
+.btn.secondary {
+  background-color: #777;
+  color: #fff;
+}
+
+.btn.danger {
+  background-color: #ff4d4d;
+  color: #fff;
+}
+
+.btn.small {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+}
+
+/* ====== TABLA CONTENEDORA ====== */
+.tabla-contenedor {
+  margin: 0 auto;
+  padding: 1rem;
+  backdrop-filter: blur(6px);
+  border-radius: 12px;
+}
+
+/* ====== TABLA ====== */
+.tabla-roles {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tabla-roles th,
+.tabla-roles td {
+  padding: 0.8rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tabla-roles th {
+  color: #ffe600;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.tabla-roles td {
+  color: #eee;
+}
+
+/* ====== ACCIONES DE LA TABLA ====== */
+.acciones-rol {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.acciones-rol .btn {
+  flex: 1 1 auto;
+  min-width: 100px;
+}
+
+/* ====== MODAL ====== */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(12px);
+  padding: 2rem;
+  border-radius: 12px;
+  color: #fff;
+  width: 90%;
+  max-width: 480px;
+  position: relative;
+}
+
+.modal-content h2 {
+  margin-bottom: 1rem;
+  color: #ffd700;
+}
+
+.cerrar {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.5rem;
+  background: none;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="hidden"] {
+  width: 100%;
+  padding: 0.6rem;
+  margin-top: 0.3rem;
+  border-radius: 6px;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 0.95rem;
+}
+
+/* ====== FOOTER DEL MODAL ====== */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+  gap: 1rem;
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 600px) {
+  .tabla-roles th,
+  .tabla-roles td {
+    font-size: 0.8rem;
+    padding: 0.5rem;
+  }
+
+  .modal-content {
+    padding: 1.2rem;
+  }
+
+  .acciones-rol {
+    flex-direction: column;
+  }
+
+  .acciones-rol .btn {
+    width: 100%;
+  }
+}
+/* ===== ACCIONES (EDITAR / ELIMINAR) EN UNA FILA ===== */
+.acciones-usuario {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.acciones-usuario form {
+  margin: 0;
+}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es"
+      th:replace="~{layout :: layout('Reportes de Ventas', ~{::section}, ~{::#extraHead}, ~{::#extraScripts}, ~{::#jsonData})}">
+
+<!-- HEAD extra -->
+<th:block id="extraHead" th:fragment="extraHead">
+    <link rel="stylesheet" th:href="@{/css/pages/reportes.css}">
+</th:block>
+
+<!-- CONTENIDO PRINCIPAL -->
+<section class="container" th:fragment="section" id="section">
+    <h2 class="titulo-modulo">📈 Reportes de Productos y Ventas</h2>
+
+    <form th:action="@{/reportes/filtrar}" method="post" class="formulario-filtros">
+        <div class="campo-fecha">
+            <label for="startDate">📅 Fecha Inicio:</label>
+            <input type="date" id="startDate" name="startDate" th:value="${startDate}" required>
+        </div>
+
+        <div class="campo-fecha">
+            <label for="endDate">📅 Fecha Fin:</label>
+            <input type="date" id="endDate" name="endDate" th:value="${endDate}" required>
+        </div>
+
+        <div class="campo-categoria">
+            <label for="categoria">📂 Categoría:</label>
+            <select id="categoria" name="categoria">
+                <option value="">Todas las categorías</option>
+                <option th:each="cat : ${categorias}" th:value="${cat.id}" th:text="${cat.nombre}"
+                        th:selected="${cat.id == categoriaSeleccionada}"></option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn primary">🔍 Filtrar</button>
+    </form>
+
+
+    <div class="tabla-contenedor glass">
+        <h3 class="subtitulo">🛒 Resultados</h3>
+        <table class="tabla-reportes">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Categoría</th>
+                    <th>Cantidad Vendida</th>
+                    <th>Total Generado</th>
+                    <th>Stock Actual</th>
+                    <th>Última Venta</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="dato : ${resultados}">
+                    <td th:text="${dato.nombreProducto}">Producto</td>
+                    <td th:text="${dato.categoria}">Categoría</td>
+                    <td th:text="${dato.cantidadVendida}">0</td>
+                    <td th:text="${#numbers.formatDecimal(dato.totalGenerado, 1, 'COMMA', 2, 'POINT')}">$0.00</td>
+                    <td th:text="${dato.stockActual}">0</td>
+                    <td th:text="${dato.fechaUltimaVentaFormato}">2025-07-01</td>
+
+                </tr>
+                <tr th:if="${#lists.isEmpty(resultados)}">
+                    <td colspan="6" style="text-align:center;">No se encontraron resultados.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="graficos-reportes">
+        <h3 class="subtitulo">📊 Gráficos del Reporte</h3>
+        <div class="grafico-contenedor"><canvas id="graficoProductosVendidos"></canvas></div>
+        <div class="grafico-contenedor"><canvas id="graficoIngresosPorFecha"></canvas></div>
+    </div>
+</section>
+
+<!-- Fragmento para scripts JSON -->
+<th:block id="jsonData" th:fragment="jsonData">
+    <script id="datosProductos" type="application/json" th:inline="none" th:utext="${productosJson ?: '[]'}"></script>
+    <script id="datosVentas" type="application/json" th:inline="none" th:utext="${ventasJson ?: '[]'}"></script>
+</th:block>
+
+<!-- Fragmento para scripts JS -->
+<th:block id="extraScripts" th:fragment="extraScripts">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script th:src="@{/js/reportes.js}" defer></script>
+</th:block>
+</html>

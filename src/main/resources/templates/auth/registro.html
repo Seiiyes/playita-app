@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es"
+      th:replace="~{layout :: layout('Reportes de Ventas', ~{::section}, ~{::#extraHead}, ~{::#extraScripts}, ~{::#jsonData})}"
+
+
+<!-- Fragmento de CSS adicional -->
+<th:block id="extraHead" th:fragment="extraHead">
+    <link rel="stylesheet" th:href="@{/css/pages/registro.css}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+</th:block>
+
+<!-- Fragmento de JS adicional -->
+<th:block id="extraScripts" th:fragment="extraScripts">
+    <script th:src="@{/js/registro.js}" defer></script>
+</th:block>
+
+<!-- Contenido principal -->
+<section class="registro-container" th:fragment="section">
+    <h2>Crear Cuenta</h2>
+
+    <!-- 📄 Formulario -->
+    <form th:action="@{/auth/registro}" method="post" th:object="${usuario}" novalidate>
+
+        <input type="text" th:field="*{documento}" placeholder="Documento" required>
+
+        <input type="text" th:field="*{primerNombre}" placeholder="Primer Nombre" required>
+
+        <input type="text" th:field="*{segundoNombre}" placeholder="Segundo Nombre">
+
+        <input type="text" th:field="*{primerApellido}" placeholder="Primer Apellido" required>
+
+        <input type="text" th:field="*{segundoApellido}" placeholder="Segundo Apellido">
+
+        <div class="input-group">
+            <input type="email" th:field="*{correo}" placeholder="Correo Electrónico" required id="correo">
+            <div class="input-error" id="correo-error"></div>
+        </div>
+
+        <input type="text" th:field="*{telefono}" placeholder="Teléfono" id="telefono">
+
+        <div class="password-group">
+            <input type="password" th:field="*{contrasena}" placeholder="Contraseña" required id="password">
+            <button type="button" class="toggle-password" onclick="togglePassword('password')">👁</button>
+        </div>
+
+        <div class="password-group">
+            <input type="password" placeholder="Confirmar Contraseña" required id="confirmPassword">
+            <button type="button" class="toggle-password" onclick="togglePassword('confirmPassword')">👁</button>
+        </div>
+        <div class="input-error" id="password-error"></div>
+
+        <button type="submit" class="btn">Registrarse</button>
+    </form>
+
+    <p class="register-text">
+        ¿Ya tienes cuenta? <a th:href="@{/auth/login}">Inicia sesión</a>
+    </p>
+
+    <!-- Notificaciones si vienen desde el backend -->
+    <div th:if="${registroExitoso}" id="registroExito" th:data-msg="${registroExitoso}"></div>
+    <div th:if="${registroError}" id="registroError" th:data-msg="${registroError}"></div>
+</section>
+</html>

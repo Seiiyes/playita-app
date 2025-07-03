@@ -1,0 +1,297 @@
+/* ======== CONTENEDOR PRINCIPAL ======== */
+.ventas-container {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  animation: fadeIn 0.6s ease-in-out;
+  color: #fff;
+}
+
+/* ======== ENCABEZADO Y BOTÓN NUEVA VENTA ======== */
+.ventas-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.ventas-header h1 {
+  font-size: 2rem;
+  color: #ffe600;
+}
+
+.btn-primary {
+  background-color: #ffd700;
+  color: #000;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #ffc107;
+}
+
+/* ======== TABLA DE VENTAS ======== */
+.ventas-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.ventas-table th, .ventas-table td {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: left;
+}
+
+/* ======== MODAL PRINCIPAL ======== */
+.modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.6);
+  z-index: 999;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+}
+
+/* ======== CONTENIDO DEL MODAL ======== */
+.modal-content {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 2rem;
+  border-radius: 16px;
+  max-width: 700px;
+  width: 95%;
+  color: #fff;
+  position: relative;
+  z-index: 999;
+}
+
+.modal-content label {
+  display: block;
+  margin: 0.7rem 0 0.3rem;
+}
+
+.modal-content input,
+.modal-content select {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: none;
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  outline: none;
+}
+
+/* ======== PRODUCTO ITEM FLEXIBLE ======== */
+.producto-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.producto-item select,
+.producto-item input {
+  flex: 1;
+  min-width: 100px;
+}
+
+.subtotal-label {
+  font-weight: bold;
+  color: #ffe600;
+  font-size: 0.95rem;
+  min-width: 120px;
+}
+
+/* ======== BOTÓN AÑADIR PRODUCTO ======== */
+.btn-agregar {
+  margin-top: 1rem;
+  background: #2196f3;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-agregar:hover {
+  background: #1e88e5;
+}
+
+/* ======== TOTAL VENTA ======== */
+.resumen-total {
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+  text-align: right;
+  color: #ffd700;
+}
+
+/* ======== GRUPO DE BOTONES FINAL ======== */
+.btn-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.btn-guardar {
+  background: #ffd700;
+  color: #000;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+.btn-cancelar {
+  background: #aaa;
+  color: #000;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+/* ======== CERRAR MODAL (X) ======== */
+.cerrar {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #fff;
+}
+
+/* ======== BOTÓN ELIMINAR PRODUCTO ======== */
+.btn-quitar {
+  background: #f44336;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-quitar:hover {
+  background: #d32f2f;
+}
+
+/* ======== BOTÓN MINI (para + Cliente) ======== */
+.btn-mini {
+  background: #4caf50;
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-mini:hover {
+  background: #388e3c;
+}
+
+/* ======== ANIMACIÓN DE ENTRADA ======== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* ======== MODAL NUEVO CLIENTE: ESTILO COHERENTE ======== */
+#modalCliente .modal-content {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 2rem;
+  border-radius: 16px;
+  max-width: 600px;
+  width: 100%;
+  color: #fff;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+}
+
+#modalCliente .modal-content label {
+  color: #ffe600;
+  margin-top: 0.8rem;
+  font-weight: bold;
+  display: block;
+}
+
+#modalCliente .modal-content input {
+  width: 100%;
+  padding: 0.5rem 0.8rem;
+  margin-top: 0.2rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+#modalCliente .modal-content input:focus {
+  border: 1px solid #ffd700;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+#modalCliente .btn-group {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+  gap: 1rem;
+}
+
+#modalCliente .btn-guardar {
+  background-color: #ffd700;
+  color: #000;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#modalCliente .btn-cancelar {
+  background-color: #aaa;
+  color: #000;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}

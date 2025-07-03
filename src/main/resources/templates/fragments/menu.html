@@ -1,0 +1,28 @@
+<!-- fragments/menu.html -->
+<aside class="sidebar glass" th:fragment="menu">
+    <nav role="navigation" aria-label="Menú lateral" class="menu-section">
+        <ul>
+            <!-- Inicio -->
+            <li><a th:href="@{/dashboard}">🏠 Inicio</a></li>
+
+            <!-- ADMIN -->
+            <li class="menu-subtitle" sec:authorize="hasRole('ADMIN')">🛠 Administrador</li>
+            <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/usuarios}">👥 Usuarios</a></li>
+            <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/productos}">📦 Productos</a></li>
+            <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/categorias}">🗂 Categorías</a></li>
+            <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/proveedores}">🚚 Proveedores</a></li>
+            <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/roles}">🛡 Roles</a></li>
+            <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/reportes}">📊 Reportes</a></li>
+
+            <!-- VENDEDOR -->
+            <li class="menu-subtitle" sec:authorize="hasRole('VENDEDOR')">🧾 Vendedor</li>
+            <li sec:authorize="hasRole('VENDEDOR')"><a th:href="@{/ventas}">🧾 Ventas</a></li>
+            <li sec:authorize="hasRole('VENDEDOR')"><a th:href="@{/reabastecimientos}">📥 Reabastecimiento</a></li>
+            <li sec:authorize="hasRole('VENDEDOR')"><a th:href="@{/pedidos}">🚚 Pedidos</a></li>
+            <li sec:authorize="hasRole('VENDEDOR')"><a th:href="@{/pqrc}">📋 PQRC</a></li>
+        </ul>
+    </nav>
+</aside>
+
+<!-- Botón hamburguesa (opcional, si quieres mantenerlo para responsive) -->
+<button id="toggleSidebar" class="sidebar-toggle">☰</button>

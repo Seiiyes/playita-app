@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="es"
+      th:replace="~{layout :: layout('Título de tu página', ~{::section}, ~{::#extraHead}, ~{::#extraScripts}, ~{::#jsonData})}">
+
+
+<!-- Fragmento extra para <head> -->
+<th:block id="extraHead" th:fragment="extraHead">
+    <link rel="stylesheet" th:href="@{/css/pages/dashboard.css}">
+</th:block>
+
+<!-- Fragmento extra para scripts (vacío si no hay scripts personalizados) -->
+<th:block id="extraScripts" th:fragment="extraScripts">
+    <!-- Scripts específicos aquí si necesitas -->
+</th:block>
+
+<!-- Fragmento de contenido principal -->
+<div id="contenido" th:fragment="contenido">
+    <section class="dashboard-container">
+        <div class="dashboard-content">
+            <h1>Bienvenido, <span th:text="${nombreCompleto}">Administrador</span></h1>
+
+            <p>Desde aquí puedes gestionar todo el sistema.</p>
+
+            <div class="tarjetas-acciones">
+                <a th:href="@{/usuarios}" class="card-link">👥 Usuarios</a>
+                <a th:href="@{/productos}" class="card-link">📦 Productos</a>
+                <a th:href="@{/categorias}" class="card-link">🗂 Categorías</a>
+                <a th:href="@{/roles}" class="card-link">🛡 Roles</a>
+                <a th:href="@{/proveedores}" class="card-link">🚚 Proveedores</a>
+                <a th:href="@{/reportes}" class="card-link">📊 Reportes</a>
+            </div>
+        </div>
+    </section>
+</div>
+
+</html>

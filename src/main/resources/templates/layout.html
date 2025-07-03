@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="es"
+      th:fragment="layout(titulo, contenido, extraHead, extraScripts, jsonData)">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${titulo}">La Playita</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" th:href="@{/images/la-playita-logo.png}">
+
+    <!-- Estilos globales -->
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" th:href="@{/css/components/header.css}">
+    <link rel="stylesheet" th:href="@{/css/components/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/components/buttons.css}">
+    <link rel="stylesheet" th:href="@{/css/components/sidebar.css}">
+
+    <!-- Fragmento adicional en el <head> -->
+    <th:block th:if="${extraHead != null}">
+        <th:block th:replace="${extraHead}"></th:block>
+    </th:block>
+</head>
+
+<body th:classappend="${#authorization.expression('isAuthenticated()')} ? 'authenticated'">
+
+    <!-- Botón hamburguesa para móvil -->
+    <button id="toggleSidebar"
+            class="sidebar-toggle"
+            aria-label="Alternar menú lateral"
+            aria-expanded="false">
+        ☰
+    </button>
+
+    <!-- Fondo decorativo -->
+    <div th:replace="~{fragments/overlay :: background}"></div>
+
+    <!-- Encabezado -->
+    <header th:replace="~{fragments/header :: header}"></header>
+
+    <!-- Menú lateral (solo si autenticado y mostrarSidebar no está definido como false) -->
+    <th:block th:if="${mostrarSidebar} == null or ${mostrarSidebar}">
+        <aside sec:authorize="isAuthenticated()" th:replace="~{fragments/menu :: menu}"></aside>
+    </th:block>
+
+    <!-- Contenido principal -->
+    <main class="content" role="main">
+        <div th:replace="${contenido}"></div>
+    </main>
+
+    <!-- Pie de página -->
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+
+    <!-- Scripts globales -->
+    <div th:replace="~{fragments/scripts :: scripts}"></div>
+
+    <!-- ✅ SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+
+    <!-- Fragmento adicional en scripts -->
+    <th:block th:if="${extraScripts != null}">
+        <th:block th:replace="${extraScripts}"></th:block>
+    </th:block>
+
+    <!-- ✅ Fragmento de datos JSON embebidos para reportes -->
+    <th:block th:if="${jsonData != null}">
+        <th:block th:replace="${jsonData}"></th:block>
+    </th:block>
+
+</body>
+</html>

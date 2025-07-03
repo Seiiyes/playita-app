@@ -1,0 +1,190 @@
+/* Fondo general */
+body {
+  background: url('/images/fondo.jpeg') no-repeat center center fixed;
+  background-size: cover;
+  font-family: 'Segoe UI', sans-serif;
+  color: #fff;
+  margin: 0;
+}
+
+/* Título principal */
+.titulo-modulo {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 1.5rem 0;
+  color: #ffd700;
+  text-align: center;
+}
+
+/* Botones */
+.btn {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn.primary {
+  background-color: #00ffa2;
+  color: #000;
+  box-shadow: 0 0 10px #00ffa2;
+}
+
+.btn.primary:hover {
+  background-color: #00cc85;
+}
+
+.btn.secondary {
+  background-color: #777;
+  color: #fff;
+}
+
+.btn.danger {
+  background-color: #ff4d4d;
+  color: #fff;
+}
+
+.btn.small {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+}
+
+/* Contenedor tabla */
+.tabla-contenedor {
+  margin: 0 auto;
+  padding: 1rem;
+  backdrop-filter: blur(4px);
+  border-radius: 12px;
+}
+
+/* Tabla PQRC */
+.tabla-categorias {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tabla-categorias th,
+.tabla-categorias td {
+  padding: 0.8rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tabla-categorias th {
+  color: #ffe600;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.tabla-categorias td {
+  color: #eee;
+}
+
+/* Modales */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(12px);
+  padding: 2rem;
+  border-radius: 12px;
+  color: #fff;
+  width: 90%;
+  max-width: 480px;
+  position: relative;
+}
+
+.cerrar {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.5rem;
+  background: none;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* Inputs y selects en modal */
+.modal-content label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+  color: #ddd;
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="hidden"],
+.modal-content textarea,
+.modal-content select {
+  width: 100%;
+  padding: 0.6rem;
+  margin-top: 0.3rem;
+  border-radius: 6px;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 0.95rem;
+}
+
+/* Grupo de botones */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+  gap: 1rem;
+}
+
+/* Select personalizado */
+select {
+  background-color: #121212;
+  color: #fff;
+  border: 1px solid #444;
+  border-radius: 6px;
+  padding: 8px;
+  font-size: 14px;
+  width: 100%;
+  appearance: none;
+}
+
+select option {
+  background-color: #222;
+  color: #fff;
+}
+
+select:focus {
+  outline: none;
+  border-color: #00ffcc;
+  box-shadow: 0 0 4px #00ffcc;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .tabla-categorias th,
+  .tabla-categorias td {
+    font-size: 0.8rem;
+    padding: 0.5rem;
+  }
+
+  .modal-content {
+    padding: 1.2rem;
+  }
+}

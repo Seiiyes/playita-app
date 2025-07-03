@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="es"
+      th:replace="~{layout :: layout('Reportes de Ventas', ~{::section}, ~{::#extraHead}, ~{::#extraScripts}, ~{::#jsonData})}"
+
+
+<!-- HEAD extra -->
+<th:block id="extraHead" th:fragment="extraHead">
+    <link rel="stylesheet" th:href="@{/css/pages/usuarios.css}">
+</th:block>
+
+<!-- CONTENIDO -->
+<section class="container" th:fragment="section" id="section">
+    <h2 class="titulo-modulo">👥 Gestión de Usuarios</h2>
+
+    <div class="acciones-top">
+        <button id="btnNuevoUsuario" class="btn primary">➕ Nuevo Usuario</button>
+    </div>
+
+    <div class="tabla-contenedor glass">
+        <table class="tabla-categorias">
+            <thead>
+                <tr>
+                   
+                    <th>Documento</th>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Rol</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="usuario : ${usuarios}">
+                    
+                    <td th:text="${usuario.documento}">123456</td>
+                    <td th:text="${usuario.primerNombre + ' ' + usuario.segundoNombre + ' ' + usuario.primerApellido + ' ' + usuario.segundoApellido}">Nombre</td>
+                    <td th:text="${usuario.correo}">correo@example.com</td>
+                    <td th:text="${usuario.rol.descRol}">Vendedor</td>
+                    <td th:text="${usuario.estado == 1 ? 'Activo' : 'Inactivo'}">Activo</td>
+                    <td>
+                         <div class="acciones-usuario">
+                        <button type="button"
+                                class="btn small secondary btnEditarUsuario"
+                                th:attr="data-id=${usuario.id},
+                                         data-documento=${usuario.documento},
+                                         data-primer-nombre=${usuario.primerNombre},
+                                         data-segundo-nombre=${usuario.segundoNombre},
+                                         data-primer-apellido=${usuario.primerApellido},
+                                         data-segundo-apellido=${usuario.segundoApellido},
+                                         data-correo=${usuario.correo},
+                                         data-rol-id=${usuario.rol.pkIdRoles},
+                                         data-estado=${usuario.estado}">Editar
+                            ✏️
+                        </button>
+                        <form th:action="@{/usuarios/eliminar}" method="post" class="formEliminarUsuario">
+                            <input type="hidden" name="id" th:value="${usuario.id}" />
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                            <button type="submit" class="btn btn-danger">🗑️ Eliminar</button>
+                        </form>
+                             </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- MODAL CREAR USUARIO -->
+    <div id="modalCrearUsuario" class="modal">
+        <div class="modal-content">
+            <span id="cerrarModalCrearUsuario" class="cerrar">×</span>
+            <form id="formCrearUsuario" th:action="@{/usuarios/guardar}" method="post">
+                <h2>🆕 Registrar Usuario</h2>
+
+                <input type="text" name="documento" placeholder="Documento" required>
+                <input type="text" name="primerNombre" placeholder="Primer Nombre" required>
+                <input type="text" name="segundoNombre" placeholder="Segundo Nombre">
+                <input type="text" name="primerApellido" placeholder="Primer Apellido" required>
+                <input type="text" name="segundoApellido" placeholder="Segundo Apellido">
+                <input type="email" name="correo" placeholder="Correo" required>
+                <input type="password" name="contrasena" placeholder="Contraseña" required>
+
+                <select name="fkIdRoles" id="editarRol" required>
+                    <option value="" disabled selected>Selecciona rol</option>
+                    <option th:each="rol : ${roles}"
+                            th:value="${rol.pkIdRoles}"
+                            th:text="${rol.descRol}">
+                    </option>
+                </select>
+
+                <div class="modal-actions">
+                    <button type="submit" class="btn primary">Guardar</button>
+                    <button type="button" id="cerrarModalCrearUsuario2" class="btn secondary">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL EDITAR USUARIO -->
+    <div id="modalEditarUsuario" class="modal">
+        <div class="modal-content">
+            <span id="cerrarModalEditarUsuario" class="cerrar">×</span>
+            <form id="formEditarUsuario" th:action="@{/usuarios/actualizar}" method="post">
+                <h2>✏️ Editar Usuario</h2>
+
+                <input type="hidden" name="id" id="editarIdUsuario">
+
+                <input type="text" name="documento" id="editarDocumento" placeholder="Documento" required>
+                <input type="text" name="primerNombre" id="editarPrimerNombre" placeholder="Primer Nombre" required>
+                <input type="text" name="segundoNombre" id="editarSegundoNombre" placeholder="Segundo Nombre">
+                <input type="text" name="primerApellido" id="editarPrimerApellido" placeholder="Primer Apellido" required>
+                <input type="text" name="segundoApellido" id="editarSegundoApellido" placeholder="Segundo Apellido">
+                <input type="email" name="correo" id="editarCorreo" placeholder="Correo" required>
+
+                <select name="fkIdRoles" id="editarRol" required>
+                    <option value="" disabled selected>Selecciona rol</option>
+                    <option th:each="rol : ${roles}"
+                            th:value="${rol.pkIdRoles}"
+                            th:text="${rol.descRol}">
+                    </option>
+                </select>
+
+                <select name="estado" id="editarEstado" required>
+                    <option value="1">Activo</option>
+                    <option value="0">Inactivo</option>
+                    <option value="2">Suspendido</option>
+                </select>
+
+                <div class="modal-actions">
+                    <button type="submit" class="btn primary">Actualizar</button>
+                    <button type="button" id="cerrarModalEditarUsuario2" class="btn secondary">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- JS extra -->
+<th:block id="extraScripts" th:fragment="extraScripts">
+    <script th:src="@{/js/usuarios.js}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</th:block>
+
+</html>

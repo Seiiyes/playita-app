@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="es"
+      th:replace="~{layout :: layout('Reportes de Ventas', ~{::section}, ~{::#extraHead}, ~{::#extraScripts}, ~{::#jsonData})}"
+
+
+<!-- Recursos adicionales (CSS, JS) -->
+<th:block id="extraHead" th:fragment="extraHead">
+    <link rel="stylesheet" th:href="@{/css/pages/home.css}">
+</th:block>
+
+<th:block id="extraScripts" th:fragment="extraScripts">
+    <script th:src="@{/js/home.js}" defer></script>
+</th:block>
+
+<!-- Contenido principal -->
+<section class="bienvenida" th:fragment="section">
+    <div class="glass-card">
+        <h1>
+            <span sec:authorize="!isAuthenticated()">¡Bienvenido a <span class="highlight">La Playita</span>!</span>
+            <span sec:authorize="isAuthenticated()">¡Hola <span class="highlight" sec:authentication="name"></span>!</span>
+        </h1>
+
+        <div class="acciones">
+            <a th:href="@{/auth/login}" sec:authorize="!isAuthenticated()" class="btn">Iniciar Sesión</a>
+            <a th:href="@{/auth/registro}" sec:authorize="!isAuthenticated()" class="btn secondary">Registrarse</a>
+
+            <a th:href="@{/dashboard}" sec:authorize="isAuthenticated()" class="btn">Ir al Panel</a>
+            <form th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()" style="display:inline;">
+                <button type="submit" class="btn secondary">Cerrar sesión</button>
+            </form>
+        </div>
+    </div>
+</section>
+</html>

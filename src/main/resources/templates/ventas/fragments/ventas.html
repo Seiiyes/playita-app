@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<div th:fragment="modales">
+
+    <!-- MODAL NUEVA VENTA -->
+    <div id="modalVenta" class="modal">
+        <div class="modal-content">
+            <span class="cerrar" id="cerrarModal">×</span>
+            <h2>Registrar Nueva Venta</h2>
+
+            <form th:action="@{/ventas/guardar}" method="post">
+                <!-- CLIENTE -->
+                <label for="cliente">Cliente:</label>
+                <div style="display: flex; gap: 1rem;">
+                    <select id="cliente" name="fk_id_clientes" required>
+                        <option value="" disabled selected>Seleccione</option>
+                        <option th:each="cliente : ${clientes}"
+                                th:value="${cliente.pkIdClientes}"
+                                th:text="${cliente.pNombreC + ' ' + cliente.pApellidoC}">
+                        </option>
+                    </select>
+                    <button type="button" class="btn-mini" id="btnNuevoCliente">+ Nuevo Cliente</button>
+                </div>
+
+                <!-- PRODUCTOS -->
+                <label>Productos:</label>
+                <div id="productosContainer">
+                    <div class="producto-item">
+                        <select name="productos[0].idProducto" class="select-producto" required>
+                            <option value="" disabled selected>Producto</option>
+                            <option th:each="prod : ${productos}"
+                                    th:value="${prod.id}"
+                                    th:data-precio="${prod.precioUnitario}"
+                                    th:data-stock="${prod.cantidadStock}"
+                                    th:text="${prod.nombre}">
+                            </option>
+                        </select>
+                        <input type="number" name="productos[0].cantidad" class="input-cantidad"
+                               placeholder="Cantidad" min="1" required>
+                        <span class="subtotal-label">Subtotal: $<span class="input-subtotal">0.00</span></span>
+                        <button type="button" class="btn-quitar" title="Eliminar">❌</button>
+                    </div>
+                </div>
+
+                <button type="button" id="btnAgregarProducto" class="btn-agregar">+ Añadir Producto</button>
+
+                <!-- TOTAL -->
+                <input type="hidden" name="total" id="totalInput" value="0.00">
+                <div class="resumen-total">
+                    <strong>Total: $<span id="totalVenta">0.00</span></strong>
+                </div>
+
+                <!-- BOTONES -->
+                <div class="btn-group">
+                    <button type="submit" class="btn-guardar">Guardar Venta</button>
+                    <button type="button" class="btn-cancelar" id="cerrarModal2">Cancelar</button>
+                </div>
+            </form>
+        </div>
+        <div class="modal-overlay"></div>
+    </div>
+
+    <!-- MODAL NUEVO CLIENTE -->
+    <div id="modalCliente" class="modal">
+        <div class="modal-content">
+            <span class="cerrar" id="cerrarModalCliente">×</span>
+            <h2>Registrar Nuevo Cliente</h2>
+
+            <form id="formNuevoCliente" th:action="@{/clientes/guardar}" method="post">
+                <label for="documentoC">Documento:</label>
+                <input type="text" id="documentoC" name="documentoC" required>
+
+                <label for="pNombreC">Primer Nombre:</label>
+                <input type="text" id="pNombreC" name="pNombreC" required>
+
+                <label for="sNombreC">Segundo Nombre:</label>
+                <input type="text" id="sNombreC" name="sNombreC">
+
+                <label for="pApellidoC">Primer Apellido:</label>
+                <input type="text" id="pApellidoC" name="pApellidoC" required>
+
+                <label for="sApellidoC">Segundo Apellido:</label>
+                <input type="text" id="sApellidoC" name="sApellidoC">
+
+                <label for="correoC">Correo Electrónico:</label>
+                <input type="email" id="correoC" name="correoC" required>
+
+                <label for="telC">Teléfono:</label>
+                <input type="text" id="telC" name="telC" required>
+
+                <div class="btn-group">
+                    <button type="submit" class="btn-guardar">Guardar</button>
+                    <button type="button" class="btn-cancelar" id="cerrarModalCliente2">Cancelar</button>
+                </div>
+            </form>
+        </div>
+        <div class="modal-overlay"></div>
+    </div>
+
+</div>
+</html>

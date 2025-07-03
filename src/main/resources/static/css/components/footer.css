@@ -1,0 +1,61 @@
+/* ====== FOOTER GENERAL ====== */
+.site-footer {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  font-size: 0.95rem;
+  color: #f0f0f0;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
+  margin-top: 4rem; /* Separa del contenido */
+  z-index: 5;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInFooter 0.8s ease-out forwards;
+  position: relative;
+}
+
+/* ====== ANIMACIÓN ENTRADA ====== */
+@keyframes fadeInFooter {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ====== TEXTO ====== */
+.site-footer p {
+  margin: 0;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+/* ====== ESTILO DESTACADO (marca) ====== */
+.site-footer .highlight,
+.site-footer strong,
+.site-footer b {
+  color: #ffe600;
+  font-weight: 600;
+}
+
+/* ====== ENLACES ====== */
+.site-footer a {
+  color: #ffd700;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.site-footer a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 768px) {
+  .site-footer {
+    font-size: 0.85rem;
+    padding: 1.2rem 1rem;
+  }
+}

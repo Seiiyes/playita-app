@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es"
+      th:replace="~{layout :: layout('Reportes de Ventas', ~{::section}, ~{::#extraHead}, ~{::#extraScripts}, ~{::#jsonData})}"
+
+
+<!-- HEAD -->
+<th:block id="extraHead" th:fragment="extraHead">
+    <link rel="stylesheet" th:href="@{/css/pages/ventas.css}">
+    <script th:src="@{/js/ventas.js}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+</th:block>
+
+<!-- SCRIPTS EXTRA (vacío por ahora) -->
+<th:block id="extraScripts" th:fragment="extraScripts"></th:block>
+
+<section th:fragment="contenido" class="ventas-container">
+
+    <!-- ENCABEZADO -->
+    <div class="ventas-header">
+        <h1>Gestión de Ventas</h1>
+        <button id="btnAbrirModal" class="btn btn-primary">+ Nueva Venta</button>
+    </div>
+
+    <!-- TABLA DE VENTAS -->
+    <table class="ventas-table">
+        <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Cliente</th>
+            <th>Total</th>
+            <th>Usuario</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="venta : ${ventas}">
+            <td th:text="${venta.fecha_v}">2025-07-01</td>
+            <td th:text="${venta.hora_v}">14:00</td>
+            <td th:text="${venta.cliente.pNombreU + ' ' + venta.cliente.pApellidoU}">Juan Pérez</td>
+            <td th:text="${venta.total}">50000</td>
+            <td th:text="${venta.usuario.pNombreU}">Admin</td>
+            <td>
+                <a th:href="@{/ventas/{id}(id=${venta.pk_ventas})}" class="btn-ver">Ver</a>
+
+                <!-- FORMULARIO DE ELIMINACIÓN CON CLASE PARA JS -->
+                <form th:action="@{/ventas/eliminar/{id}(id=${venta.pk_ventas})}"
+                      method="post"
+                      class="form-eliminar"
+                      style="display:inline">
+                    <button type="submit" class="btn-eliminar" title="Eliminar">🗑</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- MODALES INCLUIDOS COMO FRAGMENTO -->
+    <div th:replace="ventas/fragments/ventas :: modales"></div>
+
+</section>
+</html>

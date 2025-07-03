@@ -1,0 +1,153 @@
+/* === HEADER GENERAL === */
+header.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* === LOGO Y NOMBRE DE MARCA === */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.logo-container .logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.logo-container .logo {
+  height: 48px;
+  width: 48px;
+  object-fit: contain;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.3rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: transform 0.25s ease;
+}
+
+.logo-container .logo:hover {
+  transform: scale(1.06);
+}
+
+.logo-container .brand {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* === NAVEGACIÓN A LA DERECHA === */
+nav.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-usuario {
+  color: #ffe600;
+  font-weight: 600;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+/* === BOTONES DEL HEADER === */
+.nav-button {
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.45rem 1rem;
+  border-radius: 8px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+}
+
+.nav-button:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #ffd700;
+}
+
+.nav-button.primary {
+  background-color: #ffd700;
+  border: none;
+  color: #000;
+  font-weight: 700;
+}
+
+.nav-button.primary:hover {
+  background-color: #e5c100;
+  color: #000;
+}
+
+.nav-button.secondary {
+  border: 2px solid #fff;
+  color: #fff;
+}
+
+.nav-button.secondary:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #ffd700;
+}
+
+/* === FORMULARIO DE CIERRE DE SESIÓN === */
+.logout-form {
+  display: inline;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  header.site-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 1.2rem;
+  }
+
+  .logo-container {
+    margin-bottom: 0.6rem;
+  }
+
+  .main-nav {
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .nav-button {
+    font-size: 0.95rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .logo-container .brand {
+    font-size: 1.4rem;
+  }
+
+  .logo-container .logo {
+    height: 42px;
+    width: 42px;
+  }
+}
+/* Centro contenido horizontal dentro del header */
+.header-inner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

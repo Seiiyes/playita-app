@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="es"
+      th:replace="~{layout :: layout('Reportes de Ventas', ~{::section}, ~{::#extraHead}, ~{::#extraScripts}, ~{::#jsonData})}"
+
+
+<!-- Estilos y scripts específicos para este dashboard -->
+<th:block id="extraHead" th:fragment="extraHead">
+    <link rel="stylesheet" th:href="@{/css/pages/dashboard.css}">
+</th:block>
+
+<th:block id="extraScripts" th:fragment="extraScripts">
+    <script th:src="@{/js/dashboard-vendedor.js}" defer></script>
+</th:block>
+
+<!-- Contenido principal del panel del vendedor -->
+<section th:fragment="section" class="dashboard-container">
+    <div class="dashboard-content glass visible">
+
+        <!-- Cabecera personalizada -->
+        <header class="dashboard-header">
+            <h1 class="dashboard-title">
+                Bienvenido, <span class="highlight" th:text="${nombreCompleto}">Usuario</span>
+            </h1>
+            <p class="dashboard-description">
+                Puedes gestionar tus <strong>ventas</strong>, <strong>reabastecimientos</strong>, 
+                <strong>pedidos</strong> y responder <strong>PQRC</strong>.
+            </p>
+        </header>
+
+        <!-- Tarjetas de acción del vendedor -->
+        <section class="tarjetas-acciones">
+            <a th:href="@{/ventas}" class="card-link">🧾 Gestión de Ventas</a>
+            <a th:href="@{/reabastecimientos}" class="card-link">📥 Reabastecimiento</a>
+            <a th:href="@{/pedidos}" class="card-link">🚚 Pedidos / Envíos</a>
+            <a th:href="@{/pqrc}" class="card-link">📋 Responder PQRC</a>
+        </section>
+
+    </div>
+</section>
+</html>

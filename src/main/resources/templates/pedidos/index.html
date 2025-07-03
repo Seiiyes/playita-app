@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es"
+      th:replace="~{layout :: layout('Reportes de Ventas', ~{::section}, ~{::#extraHead}, ~{::#extraScripts}, ~{::#jsonData})}"
+
+
+<!-- HEAD -->
+<th:block id="extraHead" th:fragment="extraHead">
+  <link rel="stylesheet" th:href="@{/css/pages/pedido.css}">
+</th:block>
+
+<!-- SECTION -->
+<section class="container" th:fragment="section" id="section">
+  <h2 class="titulo-modulo">🧾 Pedidos</h2>
+
+  <div class="acciones-top">
+    <button id="btnNuevoPedido" class="btn primary">➕ Nuevo Pedido</button>
+  </div>
+
+  <div class="tabla-contenedor glass">
+    <table class="tabla-reab">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Estado</th>
+          <th>Cliente</th>
+          <th>Vendedor</th>
+          <th>Dirección</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="pedido : ${pedidos}">
+          <td th:text="${pedido.fechaPedido}">2025-07-02</td>
+          <td th:text="${pedido.estadoPedido}">Pendiente</td>
+          <td th:text="${pedido.cliente.nombreCompleto}">Juan Pérez</td>
+          <td th:text="${pedido.usuario.nombreCompleto}">Vendedor</td>
+          <td th:text="${pedido.direccionEnvio}">Cra 123</td>
+          <td class="acciones-usuario">
+            <button class="btn small secondary btnVerDetalle" th:data-id="${pedido.id}">🔍 Ver</button>
+            <button class="btn small danger formEliminarPedido" th:data-id="${pedido.id}">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- MODAL NUEVO PEDIDO -->
+  <div id="modalNuevoPedido" class="modal">
+    <div class="modal-content">
+      <span class="cerrar" id="cerrarNuevo">&times;</span>
+      <form id="formNuevoPedido" th:action="@{/pedidos/guardar}" method="post">
+        <h2>➕ Nuevo Pedido</h2>
+
+        <label>Cliente</label>
+        <select name="cliente.id" required>
+          <option value="" disabled selected>Selecciona cliente</option>
+          <option th:each="c : ${clientes}" th:value="${c.pkIdClientes}" th:text="${c.nombreCompleto}"></option>
+        </select>
+
+        <label>Vendedor</label>
+        <select name="usuario.id" required>
+          <option value="" disabled selected>Selecciona vendedor</option>
+          <option th:each="u : ${usuarios}" th:value="${u.id}" th:text="${u.nombreCompleto}"></option>
+        </select>
+
+        <label>Dirección de Envío</label>
+        <input type="text" name="direccionEnvio" required>
+
+        <label>Productos</label>
+        <div id="lineasPedido"></div>
+        <button type="button" class="btn secondary" id="agregarLineaPedido">➕ Agregar Producto</button>
+
+        <div class="modal-actions">
+          <button type="submit" class="btn primary">Guardar</button>
+          <button type="button" id="cancelarNuevo" class="btn secondary">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL DETALLE PEDIDO -->
+  <div id="modalDetallePedido" class="modal">
+    <div class="modal-content">
+      <span class="cerrar" id="cerrarDetalle">&times;</span>
+      <h2>Detalles del Pedido</h2>
+      <table class="tabla-detalle">
+        <thead>
+          <tr><th>Producto</th><th>Cantidad</th><th>Precio Unitario</th></tr>
+        </thead>
+        <tbody id="detalleBodyPedido"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- SCRIPTS -->
+<th:block id="extraScripts" th:fragment="extraScripts">
+  <script th:src="@{/js/pedido.js}" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</th:block>
+
+</html>
