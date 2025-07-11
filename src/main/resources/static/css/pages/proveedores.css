@@ -75,19 +75,19 @@ body {
 }
 
 /* Tabla */
-.tabla-proveedores {
+.tabla-productos {
   width: 100%;
   border-collapse: collapse;
 }
 
-.tabla-proveedores th, .tabla-proveedores td {
+.tabla-productos th, .tabla-productos td {
   padding: 0.7rem;
   text-align: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   color: #fff;
 }
 
-.tabla-proveedores th {
+.tabla-productos th {
   color: #ffe600;
   text-transform: uppercase;
   font-size: 0.85rem;
@@ -181,7 +181,7 @@ body {
 
 /* Responsive */
 @media (max-width: 600px) {
-  .tabla-proveedores th, .tabla-proveedores td {
+  .tabla-productos th, .tabla-productos td {
     font-size: 0.8rem;
     padding: 0.4rem;
   }

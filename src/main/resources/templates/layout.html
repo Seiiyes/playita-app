@@ -60,14 +60,14 @@
     <!-- ✅ SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
 
-    <!-- Fragmento adicional en scripts -->
-    <th:block th:if="${extraScripts != null}">
-        <th:block th:replace="${extraScripts}"></th:block>
-    </th:block>
 
     <!-- ✅ Fragmento de datos JSON embebidos para reportes -->
     <th:block th:if="${jsonData != null}">
         <th:block th:replace="${jsonData}"></th:block>
+    </th:block>
+    <!-- Fragmento adicional en scripts -->
+    <th:block th:if="${extraScripts != null}">
+        <th:block th:replace="${extraScripts}"></th:block>
     </th:block>
 
 </body>

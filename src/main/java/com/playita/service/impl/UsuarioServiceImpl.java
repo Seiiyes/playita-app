@@ -66,8 +66,22 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public boolean existsByDocumento(String documento) {
-        // Si deseas validar documento, debes tener este método en el repositorio
-        // return usuarioRepository.existsByDocumento(documento);
-        return false; // Placeholder si aún no está implementado
+        return usuarioRepository.existsByDocumento(documento);
     }
+
+    @Override
+    public Usuario buscarPorCorreo(String correo) {
+        return usuarioRepository.findByCorreo(correo).orElse(null);
+    }
+
+    @Override
+    public void actualizarContrasena(String correo, String nuevaContrasena) {
+        Usuario usuario = usuarioRepository.findByCorreo(correo).orElse(null);
+        if (usuario != null) {
+            String contrasenaEncriptada = passwordEncoder.encode(nuevaContrasena);
+            usuario.setContrasena(contrasenaEncriptada);
+            usuarioRepository.save(usuario);
+        }
+    }
+    
 }

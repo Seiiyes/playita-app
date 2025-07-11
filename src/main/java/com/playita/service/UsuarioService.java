@@ -12,4 +12,8 @@ public interface UsuarioService {
     Usuario autenticarUsuario(String correo, String contrasena);
     boolean existsByCorreo(String correo);
     boolean existsByDocumento(String documento); // <- NUEVO
+    Usuario buscarPorCorreo(String correo);
+
+    void actualizarContrasena(String correo, String nuevaContrasena);
+
 }

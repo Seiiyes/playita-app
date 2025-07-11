@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es"
-      th:replace="~{layout :: layout('Reportes de Ventas', ~{::section}, ~{::#extraHead}, ~{::#extraScripts}, ~{::#jsonData})}"
-
-
+      th:replace="~{layout :: layout('Login', ~{::section}, ~{::#extraHead}, ~{::#extraScripts}, null)}">
 <!-- Fragmento para HEAD -->
 <th:block id="extraHead" th:fragment="extraHead">
     <link rel="stylesheet" th:href="@{/css/pages/login.css}">
@@ -37,7 +35,10 @@
             <button type="submit" class="btn-login">Iniciar sesión</button>
         </form>
 
-        <!-- Link a registro -->
+        <p class="register-text">
+            <a href="javascript:void(0);" id="btnRecuperar">¿Olvidaste tu contraseña?</a>
+        </p>
+
         <p class="register-text">
             ¿No tienes cuenta? <a th:href="@{/auth/registro}">Regístrate aquí</a>
         </p>

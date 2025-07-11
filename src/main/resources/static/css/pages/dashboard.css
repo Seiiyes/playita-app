@@ -12,7 +12,7 @@
 }
 
 body:not(.no-sidebar) .dashboard-container {
-  margin-left: 260px; /* Compensación del sidebar si existe */
+  margin-left: 0; /* Compensación del sidebar si existe */
 }
 
 body.no-sidebar .dashboard-container {
